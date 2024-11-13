@@ -1,3 +1,6 @@
+import elementsLog.LogEntry;
+import elementsLog.Statistics;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -30,6 +33,7 @@ public class Main {
             int cuntLine =0;
             int countRequestsYandexBot=0;
             int countRequestsGooglebot=0;
+            Statistics statistics= new Statistics();
             try {
                 FileReader fileReader = new FileReader(path);
                 BufferedReader reader =
@@ -45,6 +49,9 @@ public class Main {
                         countRequestsYandexBot=countRequestsYandexBot+1;
                     if (searchForProgramThatMakesQueries(userAgent,program2))
                         countRequestsGooglebot=countRequestsGooglebot+1;
+                    LogEntry logEntry =new LogEntry(line);
+                    statistics.addEntry(logEntry);
+
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -54,6 +61,7 @@ public class Main {
             System.out.println("Число запросов "+ program2+" равно "+countRequestsGooglebot);
             System.out.println("Доля запросов "+ program1+" равна "+shareOfRequestsProgram(cuntLine,countRequestsYandexBot));
             System.out.println("Доля запросов "+ program2+" равна "+shareOfRequestsProgram(cuntLine,countRequestsGooglebot));
+            System.out.println("Объем часового трафика сайта "+statistics.getTrafficRate());
         }
         while (true);
 
