@@ -16,7 +16,7 @@ public class UserAgent {
         switch (detectOperatingSystem(userAgent)){
             case "Linux": this.operatingSystem=OperatingSystem.Linux ; break;
             case "Windows": this.operatingSystem=OperatingSystem.Windows; break;
-            case "mac OS": this.operatingSystem=OperatingSystem.MacOS; break;
+            case "Mac OS": this.operatingSystem=OperatingSystem.MacOS; break;
             default: this.operatingSystem=null;
         }
 
@@ -55,7 +55,7 @@ public class UserAgent {
         String[] operatingSystems = {
                 "Linux",
                 "Windows",
-                "mac OS"
+                "Mac OS"
         };
 
         for (String operatingSystem : operatingSystems) {
