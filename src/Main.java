@@ -62,6 +62,7 @@ public class Main {
             System.out.println("Доля запросов "+ program1+" равна "+shareOfRequestsProgram(cuntLine,countRequestsYandexBot));
             System.out.println("Доля запросов "+ program2+" равна "+shareOfRequestsProgram(cuntLine,countRequestsGooglebot));
             System.out.println("Объем часового трафика сайта "+statistics.getTrafficRate());
+            System.out.println("Статистику операционных систем "+statistics.getStatisticsOS());
         }
         while (true);
 
