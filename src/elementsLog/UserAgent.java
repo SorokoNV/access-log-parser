@@ -72,12 +72,12 @@ public class UserAgent {
         String[] browsers = {
                 "Opera",
                 "OPR/",
+                "Edg",
+                "YaBrowser",
                 "Chrome",
                 "Safari",
                 "Firefox",
-                "MSIE",
-                "YaBrowser",
-                "Edg"
+                "MSIE"
         };
 
         for (String browser : browsers) {

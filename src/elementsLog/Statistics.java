@@ -12,7 +12,9 @@ public class Statistics {
     private LocalDateTime minTime = LocalDateTime.MAX;
     private LocalDateTime maxTime = LocalDateTime.MIN;
     private HashSet<String> sitePages =new HashSet<>();
+    private HashSet<String> notSitePages =new HashSet<>();
     private HashMap<String, Integer> numberOfOSOccurrences =new HashMap<>();
+    private HashMap<String, Integer> numberOfBrowserOccurrences =new HashMap<>();
 
 
     public void addEntry(LogEntry logEntry){
@@ -31,11 +33,19 @@ public class Statistics {
                 cleanedUrl = logEntry.getPath();
             }
             sitePages.add(cleanedUrl);}
+        if (logEntry.getResponseCode()==404){
+            notSitePages.add(logEntry.getPath());
+        }
         if (logEntry.getUserAgent().getOperatingSystem()!=null){
             String operatingSystem=logEntry.getUserAgent().getOperatingSystem().toString();
             if (numberOfOSOccurrences.containsKey(operatingSystem))
                 numberOfOSOccurrences.put(operatingSystem, numberOfOSOccurrences.get(operatingSystem)+1);
             else  numberOfOSOccurrences.put(operatingSystem, 1);}
+        if (logEntry.getUserAgent().getBrowser()!=null){
+            String browser=logEntry.getUserAgent().getBrowser().toString();
+            if (numberOfBrowserOccurrences.containsKey(browser))
+                numberOfBrowserOccurrences.put(browser, numberOfBrowserOccurrences.get(browser)+1);
+            else  numberOfBrowserOccurrences.put(browser, 1);}
     }
     public int getTrafficRate() {
         Duration duration = Duration.between(minTime, maxTime);
@@ -58,8 +68,26 @@ public class Statistics {
         }
         return statisticsOS;
     }
+    public HashMap<String,Double> getStatisticsBrowser(){
+        HashMap<String,Double> statisticsBrowser =new HashMap<>();
+        Set<String> browsers = numberOfBrowserOccurrences.keySet();
+        ArrayList<Integer> values = new ArrayList<>(numberOfBrowserOccurrences.values());
+        int occurrenceBrowsers=0;
+        for (int value: values){
+            occurrenceBrowsers=occurrenceBrowsers+value;
+        }
+
+        for (String browser :browsers){
+            Double shareBrowser = (double)numberOfBrowserOccurrences.get(browser)/occurrenceBrowsers;
+            statisticsBrowser.put(browser,shareBrowser);
+        }
+        return statisticsBrowser;
+    }
 
     public HashSet<String> sitePages() {
         return sitePages;
+    }
+    public HashSet<String> getNotSitePages() {
+        return notSitePages;
     }
 }
