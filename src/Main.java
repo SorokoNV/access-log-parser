@@ -63,6 +63,8 @@ public class Main {
             System.out.println("Доля запросов "+ program2+" равна "+shareOfRequestsProgram(cuntLine,countRequestsGooglebot));
             System.out.println("Объем часового трафика сайта "+statistics.getTrafficRate());
             System.out.println("Статистику операционных систем "+statistics.getStatisticsOS());
+            System.out.println("Статистика браузеров "+statistics.getStatisticsBrowser());
+            System.out.println("Несуществующие страницы сайта "+statistics.getNotSitePages());
         }
         while (true);
 
